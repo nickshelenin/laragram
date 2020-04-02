@@ -1,0 +1,35 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+// Variables
+@import "variables";
+
+// Mixins
+@import "mixins";
+
+.grid-container {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    .grid-column {
+        // margin: 1rem;
+        margin: 0.2em;
+
+        .post-image {
+            width: 250px;
+            height: 250px;
+            max-width: 100%;
+            // max-height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+.post-box {
+    border: 1px solid #ccc;
+    padding: 1rem;
+}
