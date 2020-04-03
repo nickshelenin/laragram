@@ -1,32 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- <div class="container">
-    <div class="row">
-        <div class="col-3 ">
-            <img src="https://instagram.ffru6-1.fna.fbcdn.net/v/t51.2885-19/s320x320/83213956_3360255157381124_5752385570823208960_n.jpg?_nc_ht=instagram.ffru6-1.fna.fbcdn.net&_nc_ohc=46uU5LDixZ4AX8Qz4Q_&oh=e24fd7bc97e1c0c4e16056834ad1c9e4&oe=5EAE75BE"
-                alt="" class="rounded-circle w-75">
-        </div>
-
-        <div class="col-9">
-            <div class="">
-                <div class="col-3">
-                    <h1>johndoe19</h1>
-                </div>
-                <div class="col-3">
-                    <button class="btn btn-primary text-bold">Follow</button>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class=""><strong>283</strong> posts</div>
-                <div><strong>42.6k</strong> followers</div>
-                <div><strong>237</strong>following</div>
-            </div>
-
-        </div>
-    </div>
-</div> --}}
 
 <div class="container">
 
@@ -37,12 +11,11 @@
         </div>
         <div class="col-6">
             <div class="d-flex align-items-baseline justify-content-between">
-
                 <div class="d-flex">
-                    <h2 class="pr-4">{{Auth::user()->username}}</h2>
+                    <h2 class="pr-4">{{$user->username}}</h2>
                     {{-- <follow-button user-id="{{$user->id}}" follows="{{$follows}}"></follow-button> --}}
                     {{-- <button class="btn btn-primary">Follow</button> --}}
-                    <a href="/profile/{{Auth::user()->id}}/edit" class="btn btn-block font-weight-bold border">Edit
+                    <a href="/profiles/{{$user->id}}/edit" class="btn btn-block font-weight-bold border">Edit
                         profile</a>
                 </div>
 
@@ -58,7 +31,7 @@
             </div>
 
             <div class="pt-3 font-weight-bold">
-                {{Auth::user()->name}}
+                {{-- {{$user->profile()->name}} --}}
             </div>
 
             <div>
@@ -81,26 +54,26 @@
 
         <div class="grid-column">
             <a href="">
-                <img src="/assets/img/test.jpg" alt="" class="post-image" >
+                <img src="/assets/img/test.jpg" alt="" class="post-image">
             </a>
         </div>
 
 
         <div class="grid-column">
             <a href="">
-                <img src="/assets/img/test.jpg" alt="" class="post-image" >
+                <img src="/assets/img/test.jpg" alt="" class="post-image">
             </a>
         </div>
 
         <div class="grid-column">
             <a href="">
-                <img src="/assets/img/test.jpg" alt="" class="post-image" >
+                <img src="/assets/img/test.jpg" alt="" class="post-image">
             </a>
         </div>
 
         <div class="grid-column">
             <a href="">
-                <img src="/assets/img/test.jpg" alt="" class="post-image" >
+                <img src="/assets/img/test.jpg" alt="" class="post-image">
             </a>
         </div>
 

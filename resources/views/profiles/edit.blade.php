@@ -4,7 +4,8 @@
 <div class="container">
     <div class="card ">
         <div class="card-body">
-            <form method="POST" action="/profile/{{$user->id}}" enctype="multipart/form-data">
+            {{-- <form method="POST" action="/profiles/{{$user->id}}" enctype="multipart/form-data"> --}}
+            <form method="POST" action="{{action('ProfileController@update')}}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
 
@@ -42,9 +43,6 @@
                     <label for="description" class="col-md-4 col-form-label text-md-right font-weight-bold">Bio</label>
 
                     <div class="col-md-6">
-                        {{-- <input id="description" type="text"
-                            class="form-control @error('description') is-invalid @enderror" name="description"
-                            value="{{ old('description') }}" autocomplete="description" autofocus value=""> --}}
                         <textarea name="description" id="description"
                             class="form-control @error('description') is-invalid @enderror" autocomplete="description"
                             autofocus></textarea>

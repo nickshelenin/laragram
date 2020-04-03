@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class ProfilesController extends Controller
+class ProfileController extends Controller
 {
     public function __construct()
     {
@@ -19,10 +20,14 @@ class ProfilesController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param mixed $user
+     *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
+        // $user = User::find($id);
+        return view('profiles.index', ['user' => $user]);
     }
 
     /**
