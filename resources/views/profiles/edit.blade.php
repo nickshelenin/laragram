@@ -4,10 +4,11 @@
 <div class="container">
     <div class="card ">
         <div class="card-body">
-            {{-- <form method="POST" action="/profiles/{{$user->id}}" enctype="multipart/form-data"> --}}
-            <form method="POST" action="{{action('ProfileController@update')}}" enctype="multipart/form-data">
-                @csrf
+            <form method="POST" action="/profiles/{{$user->id}}" enctype="multipart/form-data">
+                {{-- <form action="{{action('ProfileController@update', $user->id)}}" enctype="multipart/form-data"
+                method="POST"> --}}
                 @method('PATCH')
+                @csrf
 
                 <div class="form-group row">
                     <label for="name" class="col-md-4 col-form-label text-md-right font-weight-bold">Name</label>
@@ -48,6 +49,21 @@
                             autofocus></textarea>
 
                         @error('description')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="image"
+                        class="col-md-4 col-form-label text-md-right font-weight-bold">Profile image</label>
+
+                    <div class="col-md-6">
+                        <input type="file" name="image" id="image"  class="form-control-file">
+
+                        @error('image')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
