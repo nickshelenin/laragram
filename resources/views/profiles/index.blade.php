@@ -15,11 +15,12 @@
             <div class="d-flex align-items-baseline justify-content-between">
                 <div class="d-flex">
                     <h2 class="pr-4">{{$user->username}}</h2>
-                    <button class="btn btn-primary">Follow</button>
 
+                    <follow-button></follow-button>
+                    
                     @can('update', $user)
-                        <a href="/profiles/{{$user->id}}/edit" class="btn font-weight-bold border mb-2">Edit
-                            profile</a>
+                    <a href="/profiles/{{$user->id}}/edit" class="btn font-weight-bold border mb-2">Edit
+                        profile</a>
                     @endcan
                 </div>
 

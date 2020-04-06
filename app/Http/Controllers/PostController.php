@@ -68,10 +68,8 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::find($id);
-
         return view('posts.show', compact('post'));
     }
 
@@ -104,9 +102,8 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::find($id);
         $postImage = public_path("storage/{$post->image}");
 
         File::delete($postImage);

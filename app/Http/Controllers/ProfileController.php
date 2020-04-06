@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -27,7 +28,6 @@ class ProfileController extends Controller
      */
     public function index(User $user)
     {
-        // $user = User::find($id);
         $posts = $user->posts->sortByDesc('created_at');
 
         return view('profiles.index', compact('user', 'posts'));
@@ -69,9 +69,13 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
+        // if (auth()->user()->id !== $user->id) {
+        //     return redirect("/profiles/{$user->id}");
+        // }
+
+        $this->authorize('update', $user->profile);
 
         return view('profiles.edit', compact('user'));
     }
@@ -83,13 +87,17 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
+        // if (auth()->user()->id !== $user->id) {
+        //     return redirect("/profiles/{$user->id}");
+        // }
+
+        $this->authorize('update', $user->profile);
+
         $this->validate($request, [
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
-        $user = User::find($id);
 
         $profile = $user->profile;
         $profile->name = $request->name;
@@ -111,7 +119,7 @@ class ProfileController extends Controller
 
         $profile->save();
 
-        return redirect("/profiles/{$id}");
+        return redirect("/profiles/{$user->id}");
     }
 
     /**

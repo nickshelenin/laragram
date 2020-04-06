@@ -20,13 +20,13 @@ Route::get('/', 'PostController@index');
 
 Route::get('/profiles/{user}', 'ProfileController@index');
 Route::get('/profiles/{user}/edit', 'ProfileController@edit');
-Route::patch('/profiles/{user}/', 'ProfileController@update');
+Route::patch('/profiles/{user}', 'ProfileController@update');
 
 Route::get('/p', 'PostController@index');
 Route::get('/p/create', 'PostController@create');
 Route::post('/p', 'PostController@store');
-Route::get('/p/{id}', 'PostController@show');
-Route::delete('/p/{id}', 'PostController@destroy');
+Route::get('/p/{post}', 'PostController@show');
+Route::delete('/p/{post}', 'PostController@destroy');
 
 // Route::resource('/p', 'PostController');
 
