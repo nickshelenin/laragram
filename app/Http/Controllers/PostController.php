@@ -35,9 +35,10 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|required'
         ]);
 
+        dd($request);
     }
 
     /**

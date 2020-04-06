@@ -7,20 +7,6 @@
     @csrf
 
     <div class="form-group row">
-        <label for="image" class="col-md-4 col-form-label text-md-right font-weight-bold">Image</label>
-
-        <div class="col-md-6">
-            <input type="file" name="image" id="image" class="form-control-file">
-
-            @error('image')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
-    </div>
-
-    <div class="form-group row">
         <label for="description" class="col-md-4 col-form-label text-md-right font-weight-bold">Description</label>
 
         <div class="col-md-6">
@@ -29,6 +15,24 @@
                 autofocus></textarea>
 
             @error('description')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="image" class="col-md-4 col-form-label text-md-right font-weight-bold">Image</label>
+
+        <div class="col-md-6">
+            {{-- <input type="file" name="image" id="image" class="form-control-file" required> --}}
+            <div class="btn btn-primary btn-sm float-left">
+                <span>Choose file</span>
+                {{-- <input type="file"> --}}
+            </div>
+
+            @error('image')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

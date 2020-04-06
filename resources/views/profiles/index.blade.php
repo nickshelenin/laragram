@@ -8,7 +8,8 @@
             {{-- <img src="/storage/{{$user->profile->image ?? 'uploads/default-image.jpg'}}" alt=""
             style="height: 150px; width: 150px; border-radius: 50%; object-fit:cover;"> --}}
 
-            <img src="{{$user->profile->profileImage($user->profile->image)}}" alt="" style="height: 150px; width: 150px; border-radius: 50%; object-fit:cover;">
+            <img src="{{$user->profile->profileImage($user->profile->image)}}" alt=""
+                style="height: 150px; width: 150px; border-radius: 50%; object-fit:cover;">
         </div>
         <div class="col-5">
             <div class="d-flex align-items-baseline justify-content-between">
@@ -46,24 +47,6 @@
         <div class="grid-container mt-5">
 
             {{-- @foreach($user->posts as $post) --}}
-
-            <div class="grid-column">
-                <a href="">
-                    <img src="/assets/img/test.jpg" alt="" class="post-image">
-                </a>
-            </div>
-
-            <div class="grid-column">
-                <a href="">
-                    <img src="/assets/img/test.jpg" alt="" class="post-image">
-                </a>
-            </div>
-
-            <div class="grid-column">
-                <a href="">
-                    <img src="/assets/img/test.jpg" alt="" class="post-image">
-                </a>
-            </div>
 
             <div class="grid-column">
                 <a href="">
