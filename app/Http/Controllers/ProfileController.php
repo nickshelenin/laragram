@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -93,11 +94,25 @@ class ProfileController extends Controller
         $profile->description = $request->description;
         $profile->website = $request->website;
 
-        if ($request->hasFile('image')) {
-            $imagePath = request('image')->store('uploads/profileImages', 'public');
+        // if ($request->hasFile('image')) {
+            $userImage = public_path("{$user->profile->image}");
+
+            // dd($userImage);
+            // return;
+
+            if (file_exists('uploads/default-image.jpg')) {
+                // unlink($userImage);
+                dd('File exists!!!');
+                return;
+            } else {
+               dd('File does not exists');
+               return;
+            }
+
+            $imagePath = request('image')->store('uploads', 'public');
             $profile->image = $imagePath;
             $profile->save();
-        }
+        // }
 
         $profile->save();
 
