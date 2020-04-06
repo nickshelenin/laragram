@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => [
+            'index',
+            'show',
+        ]]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +23,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return view('posts.index');
     }
 
     /**
@@ -29,60 +39,80 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $this->validate($request, [
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|required'
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|required',
         ]);
 
-        dd($request);
+        $post = new Post();
+        $post->user_id = auth()->user()->id;
+        $post->description = $request->description;
+
+        if ($request->hasFile('image')) {
+            $imagePath = request('image')->store('uploads/posts', 'public');
+            $post->image = $imagePath;
+            $post->save();
+        }
+        $post->save();
+
+        return redirect("/profiles/{$post->user->id}");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $post = Post::find($id);
+
+        return view('posts.show', compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $postImage = public_path("storage/{$post->image}");
+
+        File::delete($postImage);
+
+        $post->delete();
+
+        return redirect("/profiles/{$post->user->id}");
     }
 }

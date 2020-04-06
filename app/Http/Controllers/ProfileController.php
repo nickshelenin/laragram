@@ -25,11 +25,12 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index(User $user)
     {
-        $user = User::findOrFail($id);
+        // $user = User::find($id);
+        $posts = $user->posts->sortByDesc('created_at');
 
-        return view('profiles.index', ['user' => $user]);
+        return view('profiles.index', compact('user', 'posts'));
     }
 
     /**
@@ -72,7 +73,7 @@ class ProfileController extends Controller
     {
         $user = User::find($id);
 
-        return view('profiles.edit', ['user' => $user]);
+        return view('profiles.edit', compact('user'));
     }
 
     /**
@@ -102,7 +103,7 @@ class ProfileController extends Controller
             $profile->image = $imagePath;
             $profile->save();
 
-            // Delete user's previous image if exists
+            // Delete user's previous profile image if exists
             if (File::exists($userImage)) {
                 File::delete($userImage);
             }

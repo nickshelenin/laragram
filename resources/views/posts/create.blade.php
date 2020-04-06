@@ -26,11 +26,7 @@
         <label for="image" class="col-md-4 col-form-label text-md-right font-weight-bold">Image</label>
 
         <div class="col-md-6">
-            {{-- <input type="file" name="image" id="image" class="form-control-file" required> --}}
-            <div class="btn btn-primary btn-sm float-left">
-                <span>Choose file</span>
-                {{-- <input type="file"> --}}
-            </div>
+            <input type="file" name="image" id="image" class="form-control-file" required>
 
             @error('image')
             <span class="invalid-feedback" role="alert">
