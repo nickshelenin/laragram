@@ -15,7 +15,7 @@
 
                     <div class="col-md-6">
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                            name="name" value="{{ $user->name }}" autocomplete="name" autofocus>
+                            name="name" value="{{ $user->profile->name ?? ''}}" autocomplete="name" autofocus>
 
                         @error('name')
                         <span class="invalid-feedback" role="alert">
@@ -30,7 +30,7 @@
 
                     <div class="col-md-6">
                         <input id="website" type="text" class="form-control @error('website') is-invalid @enderror"
-                            name="website" value="{{ $user->name }}" autocomplete="website" autofocus>
+                            name="website" value="{{ $user->profile->website ?? '' }}" autocomplete="website" autofocus>
 
                         @error('website')
                         <span class="invalid-feedback" role="alert">
@@ -46,7 +46,7 @@
                     <div class="col-md-6">
                         <textarea name="description" id="description"
                             class="form-control @error('description') is-invalid @enderror" autocomplete="description"
-                            autofocus></textarea>
+                            autofocus>{{$user->profile->description ?? ''}}</textarea>
 
                         @error('description')
                         <span class="invalid-feedback" role="alert">
@@ -57,11 +57,11 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="image"
-                        class="col-md-4 col-form-label text-md-right font-weight-bold">Profile image</label>
+                    <label for="image" class="col-md-4 col-form-label text-md-right font-weight-bold">Profile
+                        image</label>
 
                     <div class="col-md-6">
-                        <input type="file" name="image" id="image"  class="form-control-file">
+                        <input type="file" name="image" id="image" class="form-control-file">
 
                         @error('image')
                         <span class="invalid-feedback" role="alert">

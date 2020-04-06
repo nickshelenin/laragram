@@ -18,10 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('/profiles/{user}', 'ProfileController@index');
 Route::get('/profiles/{user}/edit', 'ProfileController@edit');
-Route::patch('/profiles/{user}/', 'ProfilesController@update');
+Route::patch('/profiles/{user}/', 'ProfileController@update');
 
+// Route::resource('/profiles', 'ProfileController');
+
+// Route::get('/po/create', 'PostController@create');
+// Route::get('/p/create', 'PostController@create');
+// Route::post('/p', 'PostController@store');
+
+// Route::resource('/p', 'PostController');
 
 Auth::routes();

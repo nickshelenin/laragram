@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -21,12 +19,14 @@ class ProfileController extends Controller
      * Display a listing of the resource.
      *
      * @param mixed $user
+     * @param mixed $id
      *
      * @return \Illuminate\Http\Response
      */
     public function index($id)
     {
         $user = User::findOrFail($id);
+
         return view('profiles.index', ['user' => $user]);
     }
 
@@ -66,9 +66,10 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        // $profile = Profile::find($id);
+        $user = User::find($id);
+
         return view('profiles.edit', ['user' => $user]);
     }
 
@@ -79,9 +80,28 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(User $user)
+    public function update(Request $request, $id)
     {
-        dd($user);
+        $this->validate($request, [
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $user = User::find($id);
+
+        $profile = $user->profile;
+        $profile->name = $request->name;
+        $profile->description = $request->description;
+        $profile->website = $request->website;
+
+        if ($request->hasFile('image')) {
+            $imagePath = request('image')->store('uploads/profileImages', 'public');
+            $profile->image = $imagePath;
+            $profile->save();
+        }
+
+        $profile->save();
+
+        return redirect("/profiles/{$id}");
     }
 
     /**
