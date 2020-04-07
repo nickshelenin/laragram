@@ -11,8 +11,8 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => [
-            'index',
-            'show',
+            // 'index',
+            // 'show',
         ]]);
     }
 
@@ -23,8 +23,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index');
-    }
+        $users = auth()->user()->following();
+
+        return dd($users);
+    }   
 
     /**
      * Show the form for creating a new resource.

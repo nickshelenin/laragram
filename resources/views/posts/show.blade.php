@@ -22,7 +22,9 @@
                         <a href="/profiles/{{ $post->user->id }}">
                             <span class="text-dark">{{ $post->user->username }}</span>
                         </a>
-                        <a href="#" class="pl-3">Follow</a>
+
+                        {{-- <a href="#" class="pl-3">Follow</a> --}}
+                        <follow-button></follow-button>
 
                         <form action="/p/{{$post->id}}" method="POST">
                             @method('DELETE')

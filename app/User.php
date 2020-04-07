@@ -5,8 +5,6 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-
-
 class User extends Authenticatable
 {
     use Notifiable;
@@ -38,12 +36,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany('App\Profile');
+    }
+
     public function profile()
     {
         return $this->hasOne('App\Profile');
-    }
-
-    public function posts() {
-        return $this->hasMany('App\Post');
     }
 }

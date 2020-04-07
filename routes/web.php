@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PostController@index');
+Auth::routes();
 
-// Route::resource('/profiles', 'ProfileController');
+Route::get('/', 'PostController@index');
 
 Route::get('/profiles/{user}', 'ProfileController@index');
 Route::get('/profiles/{user}/edit', 'ProfileController@edit');
@@ -28,6 +28,4 @@ Route::post('/p', 'PostController@store');
 Route::get('/p/{post}', 'PostController@show');
 Route::delete('/p/{post}', 'PostController@destroy');
 
-// Route::resource('/p', 'PostController');
-
-Auth::routes();
+Route::post('/follow/{user}', 'FollowController@store');

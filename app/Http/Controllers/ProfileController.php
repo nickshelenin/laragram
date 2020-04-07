@@ -28,9 +28,11 @@ class ProfileController extends Controller
      */
     public function index(User $user)
     {
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+
         $posts = $user->posts->sortByDesc('created_at');
 
-        return view('profiles.index', compact('user', 'posts'));
+        return view('profiles.index', compact('user', 'posts', 'follows'));
     }
 
     /**
