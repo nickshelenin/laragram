@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,7 +33,19 @@ class ProfileController extends Controller
 
         $posts = $user->posts->sortByDesc('created_at');
 
-        return view('profiles.index', compact('user', 'posts', 'follows'));
+        $postsCount = Cache::remember("count.posts.{$user->id}", now()->addSeconds(30), function () use ($user) {
+            $user->posts->count();
+        });
+
+        $followersCount = Cache::remember("count.followers.{$user->id}", now()->addSeconds(30), function () use ($user) {
+            $user->profile->followers->count();
+        });
+
+        $followingCount = Cache::remember("count.following.{$user->id}", now()->addSeconds(30), function () use ($user) {
+            $user->following->count();
+        });
+
+        return view('profiles.index', compact('user', 'posts', 'follows', 'postsCount', 'followersCount', 'followingCount'));
     }
 
     /**

@@ -27,9 +27,9 @@
             </div>
 
             <div class="d-flex pt-3">
-                <div class="pr-3"><strong>{{$user->posts->count()}}</strong> posts</div>
-                <div class="pr-3"><strong>{{$user->profile->followers->count()}}</strong> followers</div>
-                <div><strong>{{$user->following()->count()}}</strong> following</div>
+                <div class="pr-3"><strong>{{$postsCount}}</strong> posts</div>
+                <div class="pr-3"><strong>{{$followersCount}}</strong> followers</div>
+                <div><strong>{{$followingCount}}</strong> following</div>
             </div>
 
             <div class="pt-3 font-weight-bold">
@@ -42,7 +42,7 @@
 
             <div>
                 <a href="{{$user->profile->website}}" target="_blank"
-                    class="font-weight-bold">{{$user->profile->website ?? ''}}</a>
+                    class="font-weight-bold">{{$user->profile->website}}</a>
             </div>
         </div>
 

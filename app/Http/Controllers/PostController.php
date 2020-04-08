@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -23,10 +24,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $users = auth()->user()->following();
+        $users = auth()->user()->following()->pluck('profiles.user_id');
+        $posts = Post::whereIn('user_id', $users)->latest()->get();
 
-        return dd($users);
-    }   
+        return view('posts.index', compact('posts'));
+    }
 
     /**
      * Show the form for creating a new resource.
