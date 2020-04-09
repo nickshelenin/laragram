@@ -10904,3 +10904,7 @@ a.text-dark:focus {
   padding: 1rem;
 }
 
+nav .logo {
+  height: 40px;
+}
+

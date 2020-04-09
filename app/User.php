@@ -41,13 +41,22 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
+    public function profile()
+    {
+        return $this->hasOne('App\Profile');
+    }
+
     public function following()
     {
         return $this->belongsToMany('App\Profile');
     }
 
-    public function profile()
-    {
-        return $this->hasOne('App\Profile');
-    }
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::created(function ($user) {
+    //         $user->profile()->create();
+    //     });
+    // }
 }

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card ">
         <div class="card-body">
-            <form method="POST" action="/profiles/{{$user->id}}" enctype="multipart/form-data">
+            <form method="POST" action="/{{$user->username}}" enctype="multipart/form-data">
                 {{-- <form action="{{action('ProfileController@update', $user->id)}}" enctype="multipart/form-data"
                 method="POST"> --}}
                 @method('PATCH')

@@ -27,68 +27,48 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index($id)
     {
+        $user = User::where('username', $id)->firstOrFail();
+
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
 
         $posts = $user->posts->sortByDesc('created_at');
 
-        $postsCount = Cache::remember("count.posts.{$user->id}", now()->addSeconds(30), function () use ($user) {
-            $user->posts->count();
-        });
+        // $postsCount = Cache::remember("count.posts.{$user->id}", now()->addSeconds(30), function () use ($user) {
+        //     $user->posts->count();
+        // });
 
-        $followersCount = Cache::remember("count.followers.{$user->id}", now()->addSeconds(30), function () use ($user) {
-            $user->profile->followers->count();
-        });
+        // $followersCount = Cache::remember("count.followers.{$user->id}", now()->addSeconds(30), function () use ($user) {
+        //     $user->profile->followers->count();
+        // });
 
-        $followingCount = Cache::remember("count.following.{$user->id}", now()->addSeconds(30), function () use ($user) {
-            $user->following->count();
-        });
+        // $followingCount = Cache::remember("count.following.{$user->id}", now()->addSeconds(30), function () use ($user) {
+        //     $user->following->count();
+        // });
+
+        $postsCount = $user->posts->count();
+        $followersCount = $user->profile->followers->count();
+        $followingCount = $user->following->count();
 
         return view('profiles.index', compact('user', 'posts', 'follows', 'postsCount', 'followersCount', 'followingCount'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param int   $id
+     * @param mixed $username
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($username)
     {
         // if (auth()->user()->id !== $user->id) {
         //     return redirect("/profiles/{$user->id}");
         // }
+
+        $user = User::where('username', $username)->firstOrFail();
 
         $this->authorize('update', $user->profile);
 
@@ -102,11 +82,13 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $username)
     {
         // if (auth()->user()->id !== $user->id) {
         //     return redirect("/profiles/{$user->id}");
         // }
+
+        $user = User::where('username', $username)->firstOrFail();
 
         $this->authorize('update', $user->profile);
 
@@ -134,7 +116,7 @@ class ProfileController extends Controller
 
         $profile->save();
 
-        return redirect("/profiles/{$user->id}");
+        return redirect("/{$user->username}");
     }
 
     /**

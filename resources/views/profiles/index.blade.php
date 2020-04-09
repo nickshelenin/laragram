@@ -8,28 +8,43 @@
             <img src="{{$user->profile->profileImage($user->profile->image)}}" alt=""
                 style="height: 150px; width: 150px; border-radius: 50%; object-fit:cover;">
         </div>
+
         <div class="col-5">
             <div class="d-flex align-items-baseline justify-content-between">
                 <div class="d-flex align-items-center">
-                    <h2 class="pr-4 mb-0">{{$user->username}}</h2>
+                    <h2 class="pr-4 mb-0 font-weight-light">{{$user->username}}</h2>
 
+                    @cannot('update', $user->profile)
                     <follow-button user-id="{{$user->id}}"></follow-button>
+                    @endcannot
 
-                    @can('update', $user)
-                    <a href="/profiles/{{$user->id}}/edit" class="btn font-weight-bold border mb-2">Edit
+                    @can('update', $user->profile)
+                    <a href="/{{$user->username}}/edit" class="btn font-weight-bold border mb-2">Edit
                         profile</a>
                     @endcan
                 </div>
 
-                @can('update', $user)
+                @can('update', $user->profile)
                 <a href="/p/create" class="btn btn-primary font-weight-bold">Add post</a>
                 @endcan
             </div>
 
             <div class="d-flex pt-3">
-                <div class="pr-3"><strong>{{$postsCount}}</strong> posts</div>
-                <div class="pr-3"><strong>{{$followersCount}}</strong> followers</div>
-                <div><strong>{{$followingCount}}</strong> following</div>
+                <div class="pr-3">
+                    <strong>{{$postsCount}}</strong> posts
+                </div>
+
+                <div class="pr-3">
+                    <a href="/{{$user->username}}/followers" class="text-dark">
+                        <strong>{{$followersCount}}</strong> followers
+                    </a>
+                </div>
+
+                <div>
+                    <a href="/{{$user->username}}/following" class="text-dark">
+                        <strong>{{$followingCount}}</strong> following
+                    </a>
+                </div>
             </div>
 
             <div class="pt-3 font-weight-bold">

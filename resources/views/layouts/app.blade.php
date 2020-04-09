@@ -27,7 +27,7 @@
             <div class="container">
                 <a class="navbar-brand" href="/ ">
                     {{-- laragram --}}
-                    <img src="img/logo.png" alt="" class="logo">
+                    <img src="/img/logo.png" alt="" class="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -61,7 +61,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a href="/profiles/{{Auth::user()->id}}"
+                                <a href="/{{Auth::user()->username}}"
                                     class="dropdown-item">{{Auth::user()->username}}</a>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
