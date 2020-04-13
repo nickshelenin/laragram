@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class FollowerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index($username)
     {
         $user = User::where('username', $username)->first();

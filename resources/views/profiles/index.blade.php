@@ -12,14 +12,14 @@
         <div class="col-5">
             <div class="d-flex align-items-baseline justify-content-between">
                 <div class="d-flex align-items-center">
-                    <h2 class="pr-4 mb-0 font-weight-light">{{$user->username}}</h2>
+                    <h2 class="pr-4 font-weight-light">{{$user->username}}</h2>
 
                     @cannot('update', $user->profile)
                     <follow-button user-id="{{$user->id}}"></follow-button>
                     @endcannot
 
                     @can('update', $user->profile)
-                    <a href="/{{$user->username}}/edit" class="btn font-weight-bold border mb-2">Edit
+                    <a href="/{{$user->username}}/edit" class="btn font-weight-bold border">Edit
                         profile</a>
                     @endcan
                 </div>

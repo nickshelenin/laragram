@@ -14,7 +14,6 @@ class FollowingController extends Controller
     public function index($username)
     {
         $user = User::where('username', $username)->first();
-
         $followings = $user->following;
 
         return view('following', compact('followings'));

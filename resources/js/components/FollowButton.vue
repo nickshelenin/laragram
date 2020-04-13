@@ -18,17 +18,22 @@ export default {
     };
   },
 
+  //   data: {
+  //     status: this.follows
+  //   },
+
   methods: {
     followUser() {
-      axios
-        .post("/follow/" + this.userId)
+      axios.post("/follow/" + this.userId)
         .then(res => {
           this.status = !this.status;
+          //   alert("test");
         })
         .catch(error => {
           if (error.response.status == 401) {
             window.location = "/login";
           }
+          console.log(error);
         });
     }
   },

@@ -17,13 +17,13 @@ class Profile extends Model
         return '/storage/'.$imagePath;
     }
 
-    public function followers()
-    {
-        return $this->belongsToMany('App\User');
-    }
-
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany('App\User');
     }
 }

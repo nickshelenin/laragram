@@ -50,13 +50,4 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Profile');
     }
-
-    // protected static function boot()
-    // {
-    //     parent::boot();
-
-    //     static::created(function ($user) {
-    //         $user->profile()->create();
-    //     });
-    // }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Post;
-use App\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -13,7 +12,7 @@ class PostController extends Controller
     {
         $this->middleware('auth', ['except' => [
             // 'index',
-            // 'show',
+            'show',
         ]]);
     }
 
@@ -62,7 +61,7 @@ class PostController extends Controller
         }
         $post->save();
 
-        return redirect("/profiles/{$post->user->id}");
+        return redirect("/{$post->user->username}");
     }
 
     /**
@@ -114,6 +113,6 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect("/profiles/{$post->user->id}");
+        return redirect("/{$post->user->username}");
     }
 }

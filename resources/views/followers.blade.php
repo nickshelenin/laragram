@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary">following</button>
+            <follow-button user-id={{$follower->id}}></follow-button>
         </li>
         @endforeach
     </ul>

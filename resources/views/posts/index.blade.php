@@ -16,7 +16,7 @@
                 <div>
                     <div>
                         <span class="font-weight-bold">
-                            <a href="/profiles/{{ $post->user->id }}">
+                            <a href="/{{ $post->user->username }}">
                                 <span class="text-dark">{{ $post->user->username }}</span>
                             </a>
                         </span> {{ $post->caption }}

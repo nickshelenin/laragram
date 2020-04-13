@@ -44,12 +44,7 @@ class ProfilePolicy
      */
     public function update(User $user, Profile $profile)
     {
-        // return $user->id === $profile->user_id  ;
-        // return in_array($user->name, [
-        //     'dennyb'
-        // ]);
-
-        return true;
+        return $user->id === $profile->user_id;
     }
 
     /**
